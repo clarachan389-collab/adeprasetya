@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>CV Ade Prasetya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap">
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #f2f5f6;
+    --surface: #ffffff;
+    --ink: #13232b;
+    --muted: #56676f;
+    --line: #dbe3e6;
+    --accent: #0b7a75;
+    --accent-soft: #d9f0ee;
+    --accent-ink: #ffffff;
+    --font-display: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
+    --font-body: "Inter", "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0c1519; --surface: #131f25; --ink: #e6eef0; --muted: #93a6ad;
+      --line: #24353c; --accent: #4fd1c5; --accent-soft: #12383a; --accent-ink: #05201e;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0c1519; --surface: #131f25; --ink: #e6eef0; --muted: #93a6ad;
+    --line: #24353c; --accent: #4fd1c5; --accent-soft: #12383a; --accent-ink: #05201e;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-padding-top: 72px; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: var(--font-body); font-size: 16px; line-height: 1.65;
+    -webkit-text-size-adjust: 100%;
+  }
+  body::before {
+    content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
+    z-index: 30; background: var(--surface);
+  }
+  h1, h2, h3 { font-family: var(--font-display); line-height: 1.2; text-wrap: balance; margin: 0; }
+  p { margin: 0; }
+  a { color: var(--accent); }
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+  button { font: inherit; color: inherit; cursor: pointer; }
+  [hidden] { display: none !important; }
+
+  .wrap {
+    max-width: 880px; margin: 0 auto;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+
+  /* Navigasi */
+  .topbar {
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+    background: var(--surface); border-bottom: 1px solid var(--line);
+  }
+  .topbar .wrap { display: flex; align-items: center; gap: 8px; }
+  .nav { display: flex; gap: 4px; overflow-x: auto; flex: 1; min-width: 0; padding-block: 8px; scrollbar-width: none; }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav a {
+    flex: none; text-decoration: none; color: var(--muted); font-size: .9rem; font-weight: 500;
+    padding: 6px 12px; border-radius: 999px;
+  }
+  .nav a[aria-current="true"] { background: var(--accent-soft); color: var(--accent); }
+  .theme-btn {
+    flex: none; width: 40px; height: 40px; border-radius: 50%;
+    border: 1px solid var(--line); background: var(--bg); display: grid; place-items: center;
+  }
+  .theme-btn svg { width: 18px; height: 18px; stroke: var(--ink); fill: none; stroke-width: 2; stroke-linecap: round; }
+
+  /* Hero */
+  .hero { padding-block: 40px 28px; }
+  .id { display: flex; gap: 18px; align-items: center; }
+  .avatar {
+    position: relative; flex: none; width: 96px; height: 96px; border-radius: 24px;
+    background: var(--accent); color: var(--accent-ink);
+    display: grid; place-items: center; overflow: hidden;
+    font-family: var(--font-display); font-weight: 700; font-size: 2rem;
+  }
+  .avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .hero h1 { font-size: clamp(1.7rem, 6vw, 2.6rem); }
+  .role { color: var(--muted); margin-top: 4px; }
+
+  /* Seksi */
+  section { padding-block: 28px; border-top: 1px solid var(--line); }
+  h2 { font-size: 1.35rem; margin-bottom: 18px; }
+  .lead { max-width: 64ch; }
+  .lead + .lead { margin-top: 12px; }
+
+  /* Pengalaman */
+  .acc { display: grid; gap: 10px; }
+  .acc-item { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; }
+  .acc-head {
+    width: 100%; background: none; border: 0; text-align: left;
+    display: flex; gap: 12px; align-items: center; justify-content: space-between; padding: 16px 18px;
+  }
+  .acc-head h3 { font-size: 1.05rem; }
+  .acc-meta { color: var(--muted); font-size: .88rem; margin-top: 2px; }
+  .chev { flex: none; width: 20px; height: 20px; stroke: var(--muted); fill: none; stroke-width: 2.2; transition: transform .2s; }
+  .acc-head[aria-expanded="true"] .chev { transform: rotate(180deg); }
+  .acc-body { padding: 0 18px 18px; }
+  .acc-body ul { margin: 0; padding-left: 20px; color: var(--muted); display: grid; gap: 6px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+  .tag { font-size: .78rem; font-weight: 500; padding: 2px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
+
+  /* Pendidikan */
+  .edu { display: grid; gap: 16px; margin: 0; padding: 0; list-style: none; }
+  .edu li { display: grid; grid-template-columns: 96px 1fr; gap: 16px; }
+  .edu time { color: var(--muted); font-size: .9rem; font-variant-numeric: tabular-nums; padding-top: 2px; }
+  .edu h3 { font-size: 1rem; }
+  .edu p { color: var(--muted); font-size: .92rem; }
+
+  /* Keahlian */
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+  .chip {
+    border: 1px solid var(--line); background: var(--surface); border-radius: 999px;
+    padding: 6px 16px; font-size: .9rem; font-weight: 500; color: var(--muted);
+  }
+  .chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+  .skills { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+  .skill {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+    padding: 12px 16px; font-weight: 500; font-size: .95rem;
+  }
+
+  /* Kontak */
+  .contact { display: grid; gap: 10px; }
+  .row {
+    display: flex; gap: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 12px 16px;
+  }
+  .row .k { font-size: .8rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+  .row .v { font-weight: 500; overflow-wrap: anywhere; }
+  .row > div { min-width: 0; }
+  .copy {
+    border: 1px solid var(--line); background: var(--bg); border-radius: 10px;
+    padding: 8px 14px; font-size: .88rem; font-weight: 500; min-width: 84px;
+  }
+  .copy.done { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+
+  footer { padding-block: 28px 40px; color: var(--muted); font-size: .85rem; border-top: 1px solid var(--line); }
+
+  @media (min-width: 760px) {
+    .hero { padding-block: 48px 28px; }
+    .avatar { width: 112px; height: 112px; }
+  }
+  @media (max-width: 420px) {
+    .edu li { grid-template-columns: 1fr; gap: 2px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .chev { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <nav class="nav" id="nav" aria-label="Navigasi CV">
+      <a href="#tentang">Tentang Saya</a>
+      <a href="#pengalaman">Pengalaman</a>
+      <a href="#pendidikan">Pendidikan</a>
+      <a href="#keahlian">Keahlian</a>
+      <a href="#kontak">Kontak</a>
+    </nav>
+    <button class="theme-btn" id="themeBtn" type="button" aria-label="Ganti tema terang atau gelap">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <div class="id">
+      <div class="avatar">
+        <span aria-hidden="true">AP</span>
+        <img src="ade-formal.jpeg" alt="Foto Ade Prasetya" onerror="this.remove()">
+      </div>
+      <div>
+        <h1>ADE PRASETYA</h1>
+        <p class="role">Kediri, Jawa Timur</p>
+      </div>
+    </div>
+  </div>
+
+  <section id="tentang" aria-labelledby="h-about">
+    <h2 id="h-about">Tentang Saya</h2>
+    <p class="lead">
+      Lulusan D4 Teknologi Rekayasa Sistem Elektronika, Universitas Negeri Malang, dengan kompetensi di bidang elektronika, sistem kontrol, PLC, desain PCB, dan Internet of Things (IoT).
+    </p>
+    <p class="lead">
+      Berpengalaman magang di PT PLN (Persero) UP3 Kediri, di mana saya mempelajari sistem distribusi tenaga listrik dan menggunakan perangkat lunak simulasi sistem tenaga listrik.
+    </p>
+    <p class="lead">
+      Memiliki kemampuan berpikir analitis dan pemecahan masalah, serta terbiasa mengoperasikan perangkat lunak pendukung teknik. Dikenal disiplin, teliti, bertanggung jawab, mudah beradaptasi, dan selalu termotivasi untuk belajar serta mengembangkan kompetensi.
+    </p>
+  </section>
+
+  <section id="pengalaman" aria-labelledby="h-exp">
+    <h2 id="h-exp">Pengalaman Kerja</h2>
+    <div class="acc" id="acc">
+      <div class="acc-item">
+        <button class="acc-head" type="button" aria-expanded="true" aria-controls="p1" id="b1">
+          <div>
+            <h3>Magang</h3>
+            <div class="acc-meta">PT PLN (Persero) UP3 Kediri &middot; Agustus 2025 – November 2025</div>
+          </div>
+          <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="acc-body" id="p1" role="region" aria-labelledby="b1">
+          <ul>
+            <li>Mensimulasikan jaringan distribusi pada area UP3 Kediri menggunakan aplikasi PSS SINCAL.</li>
+            <li>Mengukur panjang kabel dan data trafo pada jaringan di area UP3 Kediri menggunakan PSS SINCAL.</li>
+            <li>Menjadi panitia kegiatan peringatan 17 Agustus di PLN UP3 Kediri.</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">PSS SINCAL</span>
+            <span class="tag">Jaringan Distribusi</span>
+            <span class="tag">Simulasi Sistem Tenaga</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pendidikan" aria-labelledby="h-edu">
+    <h2 id="h-edu">Pendidikan</h2>
+    <ol class="edu">
+      <li>
+        <time>2022 – 2026</time>
+        <div>
+          <h3>D4 Teknologi Rekayasa Sistem Elektronika</h3>
+          <p>Universitas Negeri Malang &middot; IPK 3,61 / 4,00</p>
+        </div>
+      </li>
+      <li>
+        <time>2019 – 2022</time>
+        <div>
+          <h3>MIPA</h3>
+          <p>SMAN 1 Wates, Kediri</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section id="keahlian" aria-labelledby="h-skill">
+    <h2 id="h-skill">Keahlian</h2>
+    <div class="chips" id="chips" role="group" aria-label="Filter keahlian">
+      <button class="chip" type="button" data-f="all" aria-pressed="true">Semua</button>
+      <button class="chip" type="button" data-f="teknis" aria-pressed="false">Teknis</button>
+      <button class="chip" type="button" data-f="alat" aria-pressed="false">Perangkat Lunak</button>
+      <button class="chip" type="button" data-f="lunak" aria-pressed="false">Soft skill</button>
+    </div>
+    <div class="skills" id="skills">
+      <div class="skill" data-cat="teknis">Elektronika</div>
+      <div class="skill" data-cat="teknis">Sistem Kontrol</div>
+      <div class="skill" data-cat="teknis">PLC</div>
+      <div class="skill" data-cat="teknis">Desain PCB</div>
+      <div class="skill" data-cat="teknis">Internet of Things (IoT)</div>
+      <div class="skill" data-cat="alat">PSS SINCAL</div>
+      <div class="skill" data-cat="alat">EasyEDA</div>
+      <div class="skill" data-cat="alat">Zelio</div>
+      <div class="skill" data-cat="alat">EasyEDA</div>
+      <div class="skill" data-cat="alat">CX Progammer</div>
+      <div class="skill" data-cat="alat">Microsoft Office</div>
+      <div class="skill" data-cat="alat">Visual Studio Code</div>
+      <div class="skill" data-cat="alat">Firebase</div>
+      <div class="skill" data-cat="alat">Android Studio</div>
+      <div class="skill" data-cat="lunak">Berpikir analitis</div>
+      <div class="skill" data-cat="lunak">Pemecahan masalah</div>
+      <div class="skill" data-cat="lunak">Disiplin dan teliti</div>
+      <div class="skill" data-cat="lunak">Bertanggung jawab</div>
+      <div class="skill" data-cat="lunak">Mudah beradaptasi</div>
+    </div>
+  </section>
+
+  <section id="kontak" aria-labelledby="h-contact">
+    <h2 id="h-contact">Kontak</h2>
+    <div class="contact">
+      <div class="row">
+        <div>
+          <div class="k">Email</div>
+          <div class="v"><a href="mailto:clarachan389@gmail.com">clarachan389@gmail.com</a></div>
+        </div>
+        <button class="copy" type="button" data-copy="clarachan389@gmail.com">Salin</button>
+      </div>
+      <div class="row">
+        <div>
+          <div class="k">WhatsApp / Telepon</div>
+          <div class="v"><a href="https://wa.me/6288973658933" target="_blank" rel="noopener">0889-7365-8933</a></div>
+        </div>
+        <button class="copy" type="button" data-copy="088973658933">Salin</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">&copy; <span id="year">2026</span> Ade Prasetya</div>
+</footer>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+
+    /* Tema */
+    function isDark() {
+      var t = root.getAttribute("data-theme");
+      if (t) return t === "dark";
+      return window.matchMedia("(prefers-color-scheme: dark)").matches;
+    }
+    try {
+      var saved = localStorage.getItem("cv-theme");
+      if (saved === "dark" || saved === "light") root.setAttribute("data-theme", saved);
+    } catch (e) {}
+    document.getElementById("themeBtn").addEventListener("click", function () {
+      var next = isDark() ? "light" : "dark";
+      root.setAttribute("data-theme", next);
+      try { localStorage.setItem("cv-theme", next); } catch (e) {}
+    });
+
+    /* Akordeon pengalaman */
+    document.querySelectorAll(".acc-head").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var open = btn.getAttribute("aria-expanded") === "true";
+        btn.setAttribute("aria-expanded", String(!open));
+        document.getElementById(btn.getAttribute("aria-controls")).hidden = open;
+      });
+    });
+
+    /* Filter keahlian */
+    var chips = document.querySelectorAll(".chip");
+    var skills = document.querySelectorAll(".skill");
+    chips.forEach(function (chip) {
+      chip.addEventListener("click", function () {
+        var f = chip.getAttribute("data-f");
+        chips.forEach(function (c) { c.setAttribute("aria-pressed", String(c === chip)); });
+        skills.forEach(function (s) {
+          s.hidden = !(f === "all" || s.getAttribute("data-cat") === f);
+        });
+      });
+    });
+
+    /* Salin kontak */
+    function fallbackCopy(text) {
+      var ta = document.createElement("textarea");
+      ta.value = text; ta.setAttribute("readonly", "");
+      ta.style.position = "fixed"; ta.style.opacity = "0";
+      document.body.appendChild(ta); ta.select();
+      var ok = false;
+      try { ok = document.execCommand("copy"); } catch (e) {}
+      document.body.removeChild(ta);
+      return ok;
+    }
+    document.querySelectorAll(".copy").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var text = btn.getAttribute("data-copy");
+        function done(ok) {
+          btn.textContent = ok ? "Tersalin" : "Gagal";
+          btn.classList.toggle("done", ok);
+          setTimeout(function () { btn.textContent = "Salin"; btn.classList.remove("done"); }, 1800);
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(fallbackCopy(text)); });
+        } else {
+          done(fallbackCopy(text));
+        }
+      });
+    });
+
+    /* Penanda navigasi sesuai bagian yang dibaca */
+    var links = Array.prototype.slice.call(document.querySelectorAll("#nav a"));
+    var targets = links.map(function (a) { return document.querySelector(a.getAttribute("href")); });
+    var lastIdx = -1;
+    function spy() {
+      var y = window.scrollY + 120, idx = 0;
+      targets.forEach(function (t, i) { if (t && t.getBoundingClientRect().top + window.scrollY <= y) idx = i; });
+      if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 4) idx = targets.length - 1;
+      links.forEach(function (a, i) {
+        if (i === idx) a.setAttribute("aria-current", "true");
+        else a.removeAttribute("aria-current");
+      });
+      if (idx !== lastIdx) {
+        lastIdx = idx;
+        var nv = document.getElementById("nav"), cur = links[idx];
+        var left = cur.getBoundingClientRect().left - nv.getBoundingClientRect().left + nv.scrollLeft;
+        nv.scrollLeft = left - (nv.clientWidth - cur.offsetWidth) / 2;
+      }
+    }
+    links.forEach(function (a, i) {
+      a.addEventListener("click", function (e) {
+        e.preventDefault();
+        var t = targets[i];
+        if (!t) return;
+        var top = i === 0 ? 0 : t.getBoundingClientRect().top + window.scrollY - 64;
+        try { window.scrollTo({ top: top, behavior: "smooth" }); } catch (err) { window.scrollTo(0, top); }
+      });
+    });
+    var ticking = false;
+    window.addEventListener("scroll", function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(function () { spy(); ticking = false; }); }
+    }, { passive: true });
+    spy();
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  })();
+</script>
+</body>
+</html>
